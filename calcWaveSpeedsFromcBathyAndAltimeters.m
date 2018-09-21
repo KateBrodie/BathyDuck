@@ -2,7 +2,7 @@
 
 AltNames={'Alt03' 'Alt04' 'Alt05'};
 
-for i=1:length(AltNames)
+for i=2%1:length(AltNames)
     
     eval(['Alt=' AltNames{i} ';'])
     
@@ -15,7 +15,10 @@ for i=1:length(AltNames)
             Alt.ZcBathyT(t)=nan;
         end
     end
-
+    
+    %calculate depth errors
+    Alt.obsKFError=Alt.cBathy.depthKF-Alt.ZcBathyT';
+    Alt.obsfCError=Alt.cBathy.depthfC-Alt.ZcBathyT';
     
     %calculate speeds from fdependent wavenumbers and frequencies
     Alt.cBathy.speeds=2*pi*Alt.cBathy.fB./Alt.cBathy.k;
